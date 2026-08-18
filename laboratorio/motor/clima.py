@@ -1,12 +1,13 @@
-import os
 import requests
+
+import os
 from dotenv import load_dotenv
 
 
 load_dotenv()
-LAT = os.getenv("LATITUDE_CASA")
-LON = os.getenv("LONGITUDE_CASA")
-FUSO = os.getenv("FUSO_HORARIO")
+LAT = os.getenv('LATITUDE_CASA')
+LON = os.getenv('LONGITUDE_CASA')
+FUSO = os.getenv('FUSO_HORARIO')
 
 
 url = (
@@ -15,11 +16,11 @@ url = (
     f'precipitation&timezone={FUSO}'
 )
 
-print(f"Buscando clima para as coordenadas: {LAT}, {LON}")
+print(f'Buscando clima para as coordenadas: {LAT}, {LON}')
 
 
-resposta = requests.get(url)
-dados = resposta.json()
+resp = requests.get(url)
+dados = resp.json()
 # print(dados)
 
 
@@ -46,20 +47,20 @@ fase_lua_api = dados['daily']['moon_phase'][0]
 def mapear_fase_lua(fase):
     # Lista de tuplas (limite_superior, nome_da_fase)
     fases = [
-        (0.06, "Nova"),
-        (0.19, "Crescente"),
-        (0.31, "Quarto Crescente"),
-        (0.44, "Gibosa Crescente"),
-        (0.56, "Cheia"),
-        (0.69, "Gibosa Minguante"),
-        (0.81, "Quarto Minguante"),
-        (0.94, "Minguante")
+        (0.06, 'Nova'),
+        (0.19, 'Crescente'),
+        (0.31, 'Quarto Crescente'),
+        (0.44, 'Gibosa Crescente'),
+        (0.56, 'Cheia'),
+        (0.69, 'Gibosa Minguante'),
+        (0.81, 'Quarto Minguante'),
+        (0.94, 'Minguante')
     ]
     
     for limite, nome in fases:
         if fase < limite:
             return nome
-    return "Nova"
+    return 'Nova'
 
 fase_lua = mapear_fase_lua(fase_lua_api)
 
