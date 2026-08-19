@@ -36,7 +36,7 @@ if __name__ == '__main__':
     memoria = get_uso_memoria()
     
     if memoria is not None:
-        print("🧠 --- MONITORAMENTO DE MEMÓRIA ---")
+        print("MONITORAMENTO DE MEMÓRIA")
         print(f"Memória Total: {memoria['total_gb']:.2f} GB")
         print(f"Memória Disponível: {memoria['disponivel_gb']:.2f} GB")
         print(f"Uso de Memória: {memoria['percentual_uso']}%")
