@@ -1,18 +1,42 @@
 import psutil
 
-#cpu_percent permite obter o uso da CPU (intervalo de 1sec)
-print(f'CPU: {psutil.cpu_percent(interval=1)}%')
-print('\n')
+def get_uso_cpu():
+    try:
+        # Retorna apenas o número puro (float)
+        return psutil.cpu_percent(interval=1)
+    except Exception as erro:
+        print(f"Erro Crítico ao ler CPU: {erro}")
+        return None
 
-#virtual_memory permite obter o uso da memoria (bytes, por isso o 1024**3, para converter para GB)
-mem = psutil.virtual_memory()
-print(f'Memória total: {mem.total / (1024**3):.2f} GB')
-print(f'Memória disponível: {mem.available / (1024**3):.2f} GB')
-print(f'Uso de memória: {mem.percent}%')
-print('\n')
+def get_uso_memoria():
+    try:
+        mem = psutil.virtual_memory()
+        
+        return {
+            'total_gb': mem.total / (1024**3),
+            'disponivel_gb': mem.available / (1024**3),
+            'percentual_uso': mem.percent
+        }
+    except Exception as erro:
+        print(f"Erro Crítico ao ler Memória: {erro}")
+        return None
 
-#net_io_counters permite obter o tráfego de rede
-# net = psutil.net_io_counters()
-# print(f'Bytes enviados: {net.bytes_sent}')
-# print(f'Bytes recebidos: {net.bytes_recv}')
 
+
+
+if __name__ == '__main__':
+    cpu = get_uso_cpu()
+    
+    if cpu is not None:
+        print("💻 --- MONITORAMENTO DE CPU ---")
+        print(f"Uso atual: {cpu}%")
+        
+    print("\n")
+    
+    memoria = get_uso_memoria()
+    
+    if memoria is not None:
+        print("🧠 --- MONITORAMENTO DE MEMÓRIA ---")
+        print(f"Memória Total: {memoria['total_gb']:.2f} GB")
+        print(f"Memória Disponível: {memoria['disponivel_gb']:.2f} GB")
+        print(f"Uso de Memória: {memoria['percentual_uso']}%")
