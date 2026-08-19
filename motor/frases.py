@@ -5,7 +5,7 @@ import os
 
 def get_frase_aleatoria():
     # JSON feito por Ricardo Fiorini
-    caminho_arquivo = r'laboratorio\motor\frases\frases.json'
+    caminho_arquivo = 'motor/frases/frases.json'
     
     try:
         with open(caminho_arquivo, 'r', encoding='utf-8') as arquivo:

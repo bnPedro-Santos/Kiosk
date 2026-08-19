@@ -28,7 +28,7 @@ if __name__ == '__main__':
     cpu = get_uso_cpu()
     
     if cpu is not None:
-        print("💻 --- MONITORAMENTO DE CPU ---")
+        print("MONITORAMENTO DE CPU")
         print(f"Uso atual: {cpu}%")
         
     print("\n")
